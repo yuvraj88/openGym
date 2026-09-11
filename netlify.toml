@@ -1,0 +1,21 @@
+# Netlify deployment — builds the frontend as a static site.
+#
+# Netlify only serves static files, so this deploys the app in guest mode
+# (everything stays in the browser's localStorage). Passkey sign-in, multi-device
+# sync, the admin dashboard and Web Push need the Node API (api/server.js), which
+# keeps long-lived JSON-file state and therefore can't run as a Netlify Function —
+# host it separately (Docker / render.yaml) if you want accounts.
+#
+# Exercise images/GIFs are normally served by nginx from the media volume
+# (scripts/fetch-media.sh); on Netlify they come straight from the upstream
+# dataset's CDN instead — same pinned commit as the mobile build.
+
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION  = "22"
+  VITE_IMG_BASE = "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@7455efae41b330c265e7cd4b78dfa848e7ce5ebd/images/"
+  VITE_GIF_BASE = "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@7455efae41b330c265e7cd4b78dfa848e7ce5ebd/videos/"
