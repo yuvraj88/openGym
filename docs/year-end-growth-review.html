@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuvraj v2.0</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#0B0F14;
+  --panel:#121822;
+  --panel-2:#0E141D;
+  --line:rgba(148,170,200,.16);
+  --ink:#E9EEF5;
+  --muted:#97A3B6;
+  --green:#3DDC97;
+  --green-dim:rgba(61,220,151,.14);
+  --amber:#F0B454;
+  --red:#F27878;
+  --display:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding-block:56px 72px;padding-inline:20px}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
+
+/* ---------- hero ---------- */
+.hero{margin-bottom:44px}
+.prompt{font-family:var(--mono);font-size:13px;color:var(--muted);margin:0 0 22px;overflow-x:auto;white-space:nowrap}
+.prompt b{color:var(--green);font-weight:600}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7.5vw,80px);line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h1 .v2{color:var(--green)}
+h1 .cursor{display:inline-block;width:.45em;height:.9em;background:var(--green);vertical-align:-.08em;margin-left:.08em;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lede{font-size:19px;color:var(--muted);max-width:38em;margin:0 0 26px}
+.lede b{color:var(--ink);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.chips li{font-family:var(--mono);font-size:12px;color:var(--green);background:var(--green-dim);border:1px solid rgba(61,220,151,.25);padding:6px 12px;border-radius:999px}
+
+/* ---------- diff ---------- */
+.diff{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:44px}
+.diff-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.diff-bar .dot{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.diff pre{margin:0;padding:18px 20px;font-family:var(--mono);font-size:13.5px;line-height:1.9;overflow-x:auto}
+.dline{display:block;white-space:pre}
+.dline.h{color:var(--amber)}
+.dline.add{color:var(--green)}
+.dline.del{color:var(--red);opacity:.85}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:56px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.stat b{display:block;font-family:var(--display);font-weight:700;font-size:32px;line-height:1.1;margin-bottom:6px}
+.stat b em{font-style:normal;color:var(--green)}
+.stat .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* ---------- sections ---------- */
+.eyebrow{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:0 0 8px}
+.eyebrow b{color:var(--green);font-weight:600}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.5vw,34px);letter-spacing:-.01em;margin:0 0 26px;text-wrap:balance}
+
+/* ---------- timeline ---------- */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);position:relative;margin-bottom:60px;padding-top:6px}
+.tl::before{content:"";position:absolute;top:11px;left:12px;right:12px;height:2px;background:var(--line)}
+.tl-step{position:relative;padding:26px 18px 0 2px}
+.tl-step::before{content:"";position:absolute;top:0;left:2px;width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-dim)}
+.tl-step .hash{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.tl-step b{display:block;font-family:var(--display);font-weight:700;font-size:17px;margin:4px 0 5px}
+.tl-step span{font-size:13.5px;color:var(--muted)}
+.tl-step .tag{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--amber);border:1px solid rgba(240,180,84,.4);border-radius:999px;padding:2px 9px;margin-top:9px}
+.tl-step.major::before{background:var(--amber);box-shadow:0 0 0 5px rgba(240,180,84,.16)}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:60px}
+.card{grid-column:span 2;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;transition:transform .25s ease,border-color .25s ease}
+.card:hover{transform:translateY(-3px);border-color:rgba(61,220,151,.35)}
+.card.wide{grid-column:span 4}
+.commit{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--green);background:var(--green-dim);border-radius:6px;padding:3px 9px;margin-bottom:12px}
+.card h3{font-family:var(--display);font-weight:700;font-size:20px;margin:0 0 12px;text-wrap:balance}
+.card ul{margin:0;padding:0;list-style:none}
+.card li{position:relative;padding-left:20px;margin:9px 0;font-size:14.5px;color:var(--muted)}
+.card li::before{content:"+";position:absolute;left:0;top:-1px;font-family:var(--mono);font-weight:600;color:var(--green)}
+.card li b{color:var(--ink);font-weight:600}
+.quote{margin:18px 0 0;padding:14px 18px;background:rgba(240,180,84,.07);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;font-family:var(--mono);font-size:13.5px;line-height:1.7;color:var(--amber)}
+
+/* ---------- roadmap ---------- */
+.roadmap{margin-bottom:56px}
+.todo{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin:0;padding:0;list-style:none}
+.todo li{display:flex;gap:12px;align-items:flex-start;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px}
+.todo .box{flex:none;font-family:var(--mono);font-size:13px;color:var(--green);margin-top:1px}
+.todo span:last-child{color:var(--muted)}
+.todo b{color:var(--ink);font-weight:600}
+
+/* ---------- footer ---------- */
+footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer .up{font-family:var(--mono);color:var(--green)}
+
+@media(max-width:860px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .card,.card.wide{grid-column:span 6}
+  .todo{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .tl{grid-template-columns:1fr;padding-top:0;padding-left:6px}
+  .tl::before{top:4px;bottom:4px;left:11px;right:auto;width:2px;height:auto}
+  .tl-step{padding:0 0 26px 34px}
+  .tl-step::before{left:6px;top:4px}
+}
+@media(prefers-reduced-motion:reduce){
+  h1 .cursor{animation:none}
+  .card{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="prompt"><b>~/reviews $</b> git log --author="yuvraj" --since="Oct 2025" --until="Sep 2026"</p>
+  <h1>v1 &rarr; <span class="v2">v2</span>, shipped.<span class="cursor" aria-hidden="true"></span></h1>
+  <p class="lede">The product got its migration this year — <b>so did the engineer</b>. Twelve months of end-to-end UI ownership, automated quality, and AI-powered leverage.</p>
+  <ul class="chips">
+    <li>#ownership</li><li>#product</li><li>#quality</li><li>#innovation</li><li>#growth</li>
+  </ul>
+</header>
+
+<section class="diff" aria-label="What changed this year">
+  <div class="diff-bar"><span class="dot"></span><span class="dot"></span><span>engineer.diff — what changed this year</span></div>
+  <pre><span class="dline h">@@ Oct 2025 &rarr; Sep 2026 @@</span><span class="dline add">+ end-to-end ownership of critical UI journeys</span><span class="dline add">+ reusable mocks, test utils &amp; regression automation</span><span class="dline add">+ AI-assisted workflow, human-led judgment</span><span class="dline del">- waiting on handoffs</span><span class="dline del">- untested edge cases</span></pre>
+</section>
+
+<section class="stats" aria-label="Highlights">
+  <div class="stat"><span class="k">Ownership</span><b>May<em>.</em></b><span>Became the team's primary UI developer.</span></div>
+  <div class="stat"><span class="k">Product</span><b>2<em>×</em></b><span>Critical journeys: Software Update &amp; V1&rarr;V2.</span></div>
+  <div class="stat"><span class="k">Scope</span><b>E2E</b><span>Build &rarr; debug &rarr; integrate &rarr; maintain.</span></div>
+  <div class="stat"><span class="k">Leverage</span><b>AI<em>+</em></b><span>Tests and tooling, faster — judgment stays human.</span></div>
+</section>
+
+<section aria-label="Timeline">
+  <p class="eyebrow"><b>$</b> git log --oneline</p>
+  <h2>The year, by commits</h2>
+  <div class="tl">
+    <div class="tl-step"><span class="hash">a3f9c12</span><b>Oct — Dec</b><span>Critical UI features &amp; stabilization.</span></div>
+    <div class="tl-step"><span class="hash">7be04dd</span><b>Jan — Apr</b><span>Delivery with a quality &amp; automation focus.</span></div>
+    <div class="tl-step major"><span class="hash">e51a2f0</span><b>May</b><span>Stepped up as primary UI developer.</span><br><span class="tag">tag: v2.0</span></div>
+    <div class="tl-step"><span class="hash">c98d371</span><b>Jun — Sep</b><span>Key releases, V1&rarr;V2 migration, deeper test coverage.</span></div>
+  </div>
+</section>
+
+<section class="grid" aria-label="Contributions">
+  <div class="card">
+    <span class="commit">feat(ownership)</span>
+    <h3>The team's UI, end-to-end</h3>
+    <ul>
+      <li><b>Primary UI developer</b> after May's team change</li>
+      <li>Dev, debugging, integration &amp; maintenance</li>
+      <li>Delivery never slowed with fewer hands</li>
+    </ul>
+  </div>
+  <div class="card">
+    <span class="commit">ship(product)</span>
+    <h3>Two journeys that matter</h3>
+    <ul>
+      <li><b>Software Update</b> — critical customer-facing flow</li>
+      <li><b>V1 &rarr; V2 migration</b> — states &amp; edge cases handled</li>
+      <li>Stability &amp; usability first, regressions prevented</li>
+    </ul>
+  </div>
+  <div class="card">
+    <span class="commit">test(quality)</span>
+    <h3>Confidence, automated</h3>
+    <ul>
+      <li>Unit tests across happy, unhappy &amp; edge paths</li>
+      <li>Reusable <b>mocks, utilities &amp; helpers</b></li>
+      <li>Regression-prone flows now check themselves</li>
+    </ul>
+  </div>
+  <div class="card wide">
+    <span class="commit">perf(ai-leverage)</span>
+    <h3>AI as a force multiplier</h3>
+    <ul>
+      <li>Test scenarios &amp; edge cases drafted straight from requirements</li>
+      <li>Skeletons, mocks &amp; test data generated in minutes, not hours</li>
+      <li>Faster debugging, refactoring &amp; decoding of unfamiliar code</li>
+      <li><b>Every output reviewed</b> against real application behavior</li>
+    </ul>
+    <p class="quote">/* AI didn't replace my thinking — it gave me leverage<br>&nbsp;&nbsp; to focus on what matters most. */</p>
+  </div>
+  <div class="card">
+    <span class="commit">pair(collab)</span>
+    <h3>Stronger together</h3>
+    <ul>
+      <li>Tight loop with <b>backend, QA &amp; product</b></li>
+      <li>Dependencies flagged &amp; resolved early</li>
+      <li>Knowledge and reusable solutions shared</li>
+    </ul>
+  </div>
+</section>
+
+<section class="roadmap" aria-label="Next year">
+  <p class="eyebrow"><b>$</b> git checkout -b v3.0</p>
+  <h2>Roadmap: v3.0</h2>
+  <ul class="todo">
+    <li><span class="box">[&nbsp;]</span><span><b>Own UI architecture</b> &amp; design decisions</span></li>
+    <li><span class="box">[&nbsp;]</span><span>Push <b>regression &amp; automation</b> coverage further</span></li>
+    <li><span class="box">[&nbsp;]</span><span>Make <b>AI-assisted engineering</b> a team practice</span></li>
+    <li><span class="box">[&nbsp;]</span><span><b>Mentor developers</b>, ship reusable patterns</span></li>
+    <li><span class="box">[&nbsp;]</span><span>Louder voice in <b>product &amp; technical</b> discussions</span></li>
+  </ul>
+</section>
+
+<footer>
+  <span><b>Yuvraj Singh</b> · Software Engineer, Frontend</span>
+  <span class="up">onwards &amp; upwards ↗</span>
+</footer>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  if(!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.from('.hero > *',{y:18,opacity:0,duration:.7,ease:'power3.out',stagger:.09});
+  gsap.from('.diff .dline',{x:-14,opacity:0,duration:.45,ease:'power2.out',stagger:.08,delay:.45});
+  gsap.from('.stat',{y:14,opacity:0,duration:.55,ease:'power2.out',stagger:.07,delay:.55});
+})();
+</script>
+</body>
+</html>
